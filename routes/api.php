@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\GeneralController;
+use App\Http\Controllers\Api\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     //aplikasi
     Route::get('/checkLogin', [AuthController::class, 'checkLogin'])->name('checkLogin');
+    Route::get('/users', [UsersController::class, 'users'])->name('users');
+    Route::post('/users', [UsersController::class, 'users'])->name('users.search');
+    Route::get('/getRole', [GeneralController::class, 'getRole'])->name('getRole');
 });
