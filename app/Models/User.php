@@ -45,12 +45,30 @@ class User extends Authenticatable
     ];
 
     public static function getUsersAll($request)  {
-        // dd($request->all());
         $Sql = '';
         if (isset($request->q)) {
             $Sql .= 'and fullName like "%'.$request->q.'%" ';
         }
         $data = DB::select("select * from users where 1=1 $Sql");
         return $data;
+    }
+    public static function AddUsers($request)  {
+        $data = [
+            'fullName' => $request->data['fullName'],
+            'email' => $request->data['email'],
+            'password' => $request->data['password'],
+            'phone' => $request->data['phone'],
+            'address' => $request->data['address'],
+            'role' => $request->role,
+            'provinceId' => $request->province,
+            'regencyId' => $request->regency,
+            'districtId' => $request->district,
+            'villageId' => $request->village,
+            'created_at' => now()
+        ];
+        DB::table('users')->insert($data);
+    }
+    public static function deleteUsers($id)  {
+        DB::table('users')->where('id', $id)->delete();
     }
 }
