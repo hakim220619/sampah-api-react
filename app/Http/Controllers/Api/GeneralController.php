@@ -59,4 +59,14 @@ class GeneralController extends Controller
             'data' => $data,
         ]);
     }
+    function getUserwilayah()
+    {
+        $data = GeneralModel::getUserwilayah();
+        // dd($data);
+        return response()->json([
+            'success' => true,
+            'message' => 'SuceesssFull Show Data',
+            'data' => $data,
+        ]);
+    }
 }

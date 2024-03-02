@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GeneralController;
 use App\Http\Controllers\Api\UsersController;
+use App\Http\Controllers\Api\WilayahController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
     //aplikasi
     Route::get('/checkLogin', [AuthController::class, 'checkLogin'])->name('checkLogin');
     Route::get('/users', [UsersController::class, 'users'])->name('users');
-    Route::post('/users-add', [UsersController::class, 'users'])->name('users.search');
+    Route::post('/users-add', [UsersController::class, 'users'])->name('users.add');
+    Route::patch('/users-edit', [UsersController::class, 'users'])->name('users.edit');
     Route::delete('/users-delete/{id}', [UsersController::class, 'users'])->name('users.delete');
 
     //GeneralController
@@ -34,4 +36,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/getRegency/{id}', [GeneralController::class, 'getRegency'])->name('getRegency');
     Route::get('/getDistrict/{id}', [GeneralController::class, 'getDistrict'])->name('getDistrict');
     Route::get('/getVillage/{id}', [GeneralController::class, 'getVillage'])->name('getVillage');
+    Route::get('/users-wilayah', [GeneralController::class, 'getUserwilayah'])->name('getUserwilayah');
+    
+    //wilayah
+    Route::get('/wilayah', [WilayahController::class, 'wilayah'])->name('wilayah');
+    Route::post('/wilayah-add', [WilayahController::class, 'wilayah'])->name('wilayah.add');
+    Route::patch('/wilayah-edit', [WilayahController::class, 'wilayah'])->name('wilayah.edit');
+    Route::delete('/wilayah-delete/{id}', [WilayahController::class, 'wilayah'])->name('wilayah.delete');
+
+
+
 });

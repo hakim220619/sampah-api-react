@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\WilayahModel;
 use Illuminate\Http\Request;
-use App\Helpers\GeneralHelper;
 
-class UsersController extends Controller
+class WilayahController extends Controller
 {
-    function users()
+    function wilayah()
     {
 
         $request = Request();
         switch ($request->method()) {
             case 'GET':
-                $data = User::getUsersAll($request);
+                $data = WilayahModel::getWilayahAll($request);
                 // dd($data);
                 return response()->json([
                     'success' => true,
@@ -28,7 +27,7 @@ class UsersController extends Controller
                 break;
                 case 'POST':
                     // dd($request->all());
-                    User::AddUsers($request);
+                    WilayahModel::AddUsers($request);
                     return response()->json([
                         'success' => true,
                         'message' => 'SuceesssFull Added Data',
@@ -36,7 +35,7 @@ class UsersController extends Controller
                     break;
                 case 'PATCH':
                     // dd($request->all());
-                    User::EditUsers($request);
+                    WilayahModel::EditUsers($request);
                     return response()->json([
                         'success' => true,
                         'message' => 'SuceesssFull Edited Data',
@@ -44,7 +43,7 @@ class UsersController extends Controller
                     break;
             case 'DELETE':
 
-                User::deleteUsers($request->id);
+                WilayahModel::deleteUsers($request->id);
                 return response()->json([
                     'success' => true,
                     'message' => 'SuceesssFull Deleted Data',

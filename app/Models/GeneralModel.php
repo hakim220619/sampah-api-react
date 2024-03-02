@@ -34,4 +34,9 @@ class GeneralModel extends Model
         $data = DB::table('village')->where('id_kecamatan', $id)->get();
         return $data;
     }
+    public static function getUserwilayah()  {
+       
+        $data = DB::table('users')->where('role', 'ADW')->get();
+        return $data;
+    }
 }

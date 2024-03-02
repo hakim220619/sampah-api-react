@@ -47,9 +47,9 @@ class User extends Authenticatable
     public static function getUsersAll($request)  {
         $Sql = '';
         if (isset($request->q)) {
-            $Sql .= 'and fullName like "%'.$request->q.'%" ';
+            $Sql .= 'and u.fullName like "%'.$request->q.'%" ';
         }
-        $data = DB::select("select * from users where 1=1 $Sql");
+        $data = DB::select("select row_number() over (order by u.created_at desc) no, u.*, p.nama as province, r.nama as regency, d.nama as district, v.nama as village from users u, province p, regency r, district d, village v where u.provinceId=p.id AND u.regencyId=r.id and u.districtId=d.id AND u.villageId=v.id $Sql");
         return $data;
     }
     public static function AddUsers($request)  {
@@ -67,6 +67,37 @@ class User extends Authenticatable
             'created_at' => now()
         ];
         DB::table('users')->insert($data);
+    }
+    public static function EditUsers($request)  {
+        // dd($request->all());
+        if ($request->villageED != null) {
+            $data = [
+                'fullName' => $request->fullNameEd,
+                'email' => $request->emailEd,
+                'phone' => $request->phoneEd,
+                'address' => $request->addressEd,
+                'role' => $request->roleEd,
+                'provinceId' => $request->provinceED,
+                'regencyId' => $request->regencyED,
+                'districtId' => $request->districtED,
+                'villageId' => $request->villageED,
+                'state' => $request->stateEd,
+                'updated_at' => now()
+            ];
+        } else {
+            
+            $data = [
+                'fullName' => $request->fullNameEd,
+                'email' => $request->emailEd,
+                'phone' => $request->phoneEd,
+                'address' => $request->addressEd,
+                'role' => $request->roleEd,
+                'state' => $request->stateEd,
+                'updated_at' => now()
+            ];
+        }
+        
+        DB::table('users')->where('id', $request->id)->update($data);
     }
     public static function deleteUsers($id)  {
         DB::table('users')->where('id', $id)->delete();
