@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\WilayahModel;
+use App\Models\PaketModel;
 use Illuminate\Http\Request;
 
-class WilayahController extends Controller
+class PaketController extends Controller
 {
-    function wilayah()
+    function paket()
     {
 
         $request = Request();
         switch ($request->method()) {
             case 'GET':
-                $data = WilayahModel::getWilayahAll($request);
+                $data = PaketModel::getPaketAll($request);
                 // dd($data);
                 return response()->json([
                     'success' => true,
@@ -27,7 +27,7 @@ class WilayahController extends Controller
                 break;
                 case 'POST':
                     // dd($request->all());
-                    WilayahModel::AddWilayah($request);
+                    PaketModel::AddPaket($request);
                     return response()->json([
                         'success' => true,
                         'message' => 'SuceesssFull Added Data',
@@ -35,15 +35,14 @@ class WilayahController extends Controller
                     break;
                 case 'PATCH':
                     // dd($request->all());
-                    WilayahModel::EditWilayah($request);
+                    PaketModel::EditPaket($request);
                     return response()->json([
                         'success' => true,
                         'message' => 'SuceesssFull Edited Data',
                     ]);
                     break;
             case 'DELETE':
-
-                WilayahModel::deleteWilayah($request->id);
+                PaketModel::deletePaket($request->id);
                 return response()->json([
                     'success' => true,
                     'message' => 'SuceesssFull Deleted Data',

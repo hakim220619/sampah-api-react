@@ -36,7 +36,7 @@ class GeneralModel extends Model
     }
     public static function getUserwilayah()  {
        
-        $data = DB::table('users')->where('role', 'ADW')->get();
+        $data = DB::select("select u.*, p.nama as province, r.nama as regency, d.nama as district, v.nama as village from users u, province p, regency r, district d, village v WHERE u.provinceId=p.id and u.regencyId=r.id and u.districtId=d.id and u.villageId=v.id and u.role = 'ADW'");
         return $data;
     }
 }

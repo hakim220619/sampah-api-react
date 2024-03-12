@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GeneralController;
+use App\Http\Controllers\Api\PaketController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\WilayahController;
 use Illuminate\Http\Request;
@@ -43,6 +44,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/wilayah-add', [WilayahController::class, 'wilayah'])->name('wilayah.add');
     Route::patch('/wilayah-edit', [WilayahController::class, 'wilayah'])->name('wilayah.edit');
     Route::delete('/wilayah-delete/{id}', [WilayahController::class, 'wilayah'])->name('wilayah.delete');
+    
+    //paket
+    Route::get('/paket', [PaketController::class, 'paket'])->name('paket');
+    Route::post('/paket-add', [PaketController::class, 'paket'])->name('paket.add');
+    Route::patch('/paket-edit', [PaketController::class, 'paket'])->name('paket.edit');
+    Route::delete('/paket-delete/{id}', [PaketController::class, 'paket'])->name('paket.delete');
 
 
 
