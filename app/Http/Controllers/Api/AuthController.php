@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -33,6 +34,29 @@ class AuthController extends Controller
             'message' => 'Login berhasil',
             'token' => $token,
             'userData' => $user,
+        ]);
+    }
+
+    function register(Request $request) {
+        $data = [
+            'fullName' => $request->data['fullName'],
+            'email' => $request->data['email'],
+            'phone' => $request->data['phone'],
+            'password' => Hash::make($request->data['password']),
+            'address' => $request->data['address'],
+            'role' => 'PLG',
+            'state' => 'ON',
+            'provinceId' => $request->province,
+            'regencyId' => $request->regency,
+            'districtId' => $request->district,
+            'villageId' => $request->village,
+            'created_at' => now()
+        ];
+        DB::table('users')->insert($data);
+        return response()->json([
+            'success' => true,
+            'message' => 'Register Successs',
+            'userData' => $data,
         ]);
     }
     public function checkLogin()

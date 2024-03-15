@@ -20,9 +20,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/users-add-register', [AuthController::class, 'register'])->name('register');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/getProvince', [GeneralController::class, 'getProvince'])->name('getProvince');
+Route::get('/getRegency/{id}', [GeneralController::class, 'getRegency'])->name('getRegency');
+Route::get('/getDistrict/{id}', [GeneralController::class, 'getDistrict'])->name('getDistrict');
+Route::get('/getVillage/{id}', [GeneralController::class, 'getVillage'])->name('getVillage');
+
+Route::get('/listPaket', [GeneralController::class, 'listPaket'])->name('listPaket');
+Route::get('/listPaketDetail/{id}', [GeneralController::class, 'listPaketDetail'])->name('listPaketDetail');
+
 Route::middleware('auth:sanctum')->group(function () {
     //aplikasi
     Route::get('/checkLogin', [AuthController::class, 'checkLogin'])->name('checkLogin');
@@ -33,10 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //GeneralController
     Route::get('/getRole', [GeneralController::class, 'getRole'])->name('getRole');
-    Route::get('/getProvince', [GeneralController::class, 'getProvince'])->name('getProvince');
-    Route::get('/getRegency/{id}', [GeneralController::class, 'getRegency'])->name('getRegency');
-    Route::get('/getDistrict/{id}', [GeneralController::class, 'getDistrict'])->name('getDistrict');
-    Route::get('/getVillage/{id}', [GeneralController::class, 'getVillage'])->name('getVillage');
+   
     Route::get('/users-wilayah', [GeneralController::class, 'getUserwilayah'])->name('getUserwilayah');
     
     //wilayah

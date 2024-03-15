@@ -69,4 +69,24 @@ class GeneralController extends Controller
             'data' => $data,
         ]);
     }
+    function listPaket()
+    {
+        $data = GeneralModel::listPaket();
+        // dd($data);
+        return response()->json([
+            'success' => true,
+            'message' => 'SuceesssFull Show Data',
+            'data' => $data,
+        ]);
+    }
+    function listPaketDetail($id)
+    {
+        $data = GeneralModel::listPaketDetail($id);
+        // dd($data);
+        return response()->json([
+            'success' => true,
+            'message' => 'SuceesssFull Show Data',
+            'data' => $data,
+        ]);
+    }
 }
